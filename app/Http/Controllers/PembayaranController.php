@@ -8,8 +8,8 @@ use App\Models\JenisPembayaran;
 use App\Models\Pembayaran;
 use App\Services\Impl\PembayaranServiceImpl;
 use App\Services\PembayaranService;
-use Barryvdh\DomPDF\Facade\Pdf as FacadePdf;
-use Barryvdh\DomPDF\PDF;
+use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Http;
 
 class PembayaranController extends Controller
@@ -25,7 +25,7 @@ class PembayaranController extends Controller
         return 'pembayaran/index';
     }
 
-    public function show($id) {
+    public function show($id) {     
         $pembayaran = Pembayaran::find($id);
         $url = 'https://feb-unsiq.ac.id/api';
         $response = Http::get($url .'/mahasiswa/' . $pembayaran->nim);
@@ -59,8 +59,13 @@ class PembayaranController extends Controller
         $url = 'https://feb-unsiq.ac.id/api';
         $response = Http::get($url .'/mahasiswa/' . $pembayaran->nim);
         $mahasiswa = json_decode($response->body(), $depth=512, JSON_THROW_ON_ERROR)['data'];
+        $tanggal = Carbon::parse(now())->translatedFormat('d F Y');
+
         if ($response->status() == 200) {
-            return view('kwitansi.index', compact('pembayaran', 'mahasiswa'));
+            $image = base64_encode(file_get_contents(public_path('logo-kop-feb.png')));
+            $pdf = Pdf::loadView('kwitansi.index', compact('pembayaran', 'mahasiswa', 'image', 'tanggal'));
+            $pdf->setPaper('a5', 'landscape');
+            return $pdf->stream();
         }else {
             throw new InvariantException("Gagal menemukan data mahasiswa");
         }
