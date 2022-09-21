@@ -83,7 +83,9 @@
             <tr>
                 <td style="width: 30%; vertical-align: top;">Uang sebanyak</td>
                 <td style="width: 5%; vertical-align: top;">:</td>
-                <td style="width: 65%;"><span style="font-weight: 500; border: 1px dashed black; padding: 5px 20px;">Satu juta rupiah</span></td>
+                <td style="width: 65%;"><span style="font: italic small-caps bold 16px/30px Georgia, serif; border: 1px dashed black; padding: 5px 20px;">
+                    {{ Riskihajar\Terbilang\Facades\Terbilang::make($pembayaran->jenisPembayaran->jumlah_bayar) }} rupiah
+                </span></td>
             </tr>
             <tr>
                 <td style="width: 30%;">Guna membayar</td>
