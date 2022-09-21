@@ -19,7 +19,9 @@ class PembayaranServiceImpl implements PembayaranService
             throw new InvariantException("Jenis Pembayaran Tidak Diketahui");
         }
         
-        $no_pembayaran = $jenisPembayaran->kode_pembayaran . time();
+        $idPembayaran = Pembayaran::orderBy('id', 'DESC')->first()->id;
+        $nomer = str_pad(($idPembayaran + 1), 4, '0', STR_PAD_LEFT);
+        $no_pembayaran = $nomer .'/'.$jenisPembayaran->kode_pembayaran;
         
         try {
             $url = 'https://feb-unsiq.ac.id/api';
