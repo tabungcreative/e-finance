@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <head>
-    <title>Contoh Surat Pernyataan</title>
+    <title>Kwitansi - {{ $mahasiswa['nama'] }} - {{ $mahasiswa['nim'] }}</title>
     <meta charset="utf-8">
     <style>
         /* @page { size: 14cm 21cm portrait; } */
@@ -14,7 +14,7 @@
         }
         #judul{
             text-align:center;
-            margin-bottom: 15px;
+            margin: 30px 0px;
         }
 
         header {
@@ -45,25 +45,7 @@
 <body>
 
     <header>
-        <table width="100%">
-            <tr>
-                <td style="text-align: right">
-                    <img src="data:image/png;base64, {{ $image }}" alt="Red dot" width="80px"/>
-                </td>
-                <td style="text-align: center; color: #5c4eae;">
-                    <h3 class="title">UNIVERSITAS SAINS AL QUR’AN (UNSIQ)</h3>
-                    <h3>JAWA TENGAH DI WONOSOBO</h3>
-                    <h3>FAKULTAS EKONOMI DAN BISNIS</h3>
-                </td>
-            </tr>
-            <tr>
-                <td colspan="2" style="width: 100%; text-align: center">
-                    <small style="font-size: 10px; border: 1px solid #5c4eae; padding: 7px 40px;" >
-                        Alamat Kampus : Jl. KH. Hasyim Asy’ari Km 03 Kalibeber, Mojotengah, Wonosobo 56351 | Telp. (0286) 3399204 | Fax. (0286) 324160 | http://fe.unsiq.ac.id
-                    </small>
-                </td>
-            </tr>
-        </table>
+        <img src="data:image/png;base64, {{ $image }}" alt="Red dot" width="500px"/>
     </header>
 
     <div id=halaman>

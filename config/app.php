@@ -195,6 +195,8 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         App\Providers\PembayaranProvider::class,
+        App\Providers\JenisPembayaranProvider::class,
+
 
         // composer library
         Barryvdh\DomPDF\ServiceProvider::class,

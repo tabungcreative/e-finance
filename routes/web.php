@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\JenisPembayaranController;
 use App\Http\Controllers\PembayaranController;
 use Illuminate\Support\Facades\Route;
 
@@ -21,5 +22,6 @@ Route::get('/', function () {
 Route::prefix('admin')->name('admin.')->group(function() {
     Route::resource('pembayaran', PembayaranController::class)->only('index', 'store', 'create', 'show');
     Route::get('pembayaran/{id}/cetak', [PembayaranController::class, 'cetakKwitansi'])->name('pembayaran.cetakKwitansi');
+    Route::resource('jenis-pembayaran', JenisPembayaranController::class)->only('index', 'store', 'edit', 'update');
 });
 
