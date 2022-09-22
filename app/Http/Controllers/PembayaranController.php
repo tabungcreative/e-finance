@@ -62,7 +62,7 @@ class PembayaranController extends Controller
         $tanggal = Carbon::parse(now())->translatedFormat('d F Y');
 
         if ($response->status() == 200) {
-            $image = base64_encode(file_get_contents(public_path('logo-kop-feb.png')));
+            $image = base64_encode(file_get_contents(public_path('kop-feb.png')));
             $pdf = Pdf::loadView('kwitansi.index', compact('pembayaran', 'mahasiswa', 'image', 'tanggal'));
             $pdf->setPaper('a5', 'landscape');
             return $pdf->stream();

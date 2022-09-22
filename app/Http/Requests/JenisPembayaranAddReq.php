@@ -13,7 +13,7 @@ class JenisPembayaranAddReq extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,9 @@ class JenisPembayaranAddReq extends FormRequest
     public function rules()
     {
         return [
-            //
+            'nama_pembayaran' => 'required',
+            'kode_pembayaran' => 'required',
+            'jumlah_bayar' => 'required',
         ];
     }
 }
