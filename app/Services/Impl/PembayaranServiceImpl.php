@@ -3,10 +3,12 @@
 namespace App\Services\Impl;
 
 use App\Exceptions\InvariantException;
+use App\Helper\NumberingFormatHelper;
 use App\Http\Requests\PembayaranAddReq;
 use App\Models\JenisPembayaran;
 use App\Models\Pembayaran;
 use App\Services\PembayaranService;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Http;
 
 class PembayaranServiceImpl implements PembayaranService
@@ -19,9 +21,9 @@ class PembayaranServiceImpl implements PembayaranService
             throw new InvariantException("Jenis Pembayaran Tidak Diketahui");
         }
         
-        $idPembayaran = Pembayaran::orderBy('id', 'DESC')->first()->id;
-        $nomer = str_pad(($idPembayaran + 1), 4, '0', STR_PAD_LEFT);
-        $no_pembayaran = $nomer .'/'.$jenisPembayaran->kode_pembayaran;
+        $lastNumberPayment = Pembayaran::orderBy('id', 'DESC')->first()->no_pembayaran;
+
+        $no_pembayaran = NumberingFormatHelper::pembayaranFormat($lastNumberPayment, $jenisPembayaran->kode_pembayaran);
         
         try {
             $url = 'https://feb-unsiq.ac.id/api';
