@@ -20,8 +20,12 @@ Route::get('/', function () {
 });
 
 Route::prefix('admin')->name('admin.')->group(function() {
-    Route::resource('pembayaran', PembayaranController::class)->only('index', 'store', 'create', 'show');
+    Route::resource('pembayaran', PembayaranController::class)->only('index', 'store', 'show');
+    Route::get('pembayaran/{nim}/create', [PembayaranController::class, 'create'])->name('pembayaran.create');
     Route::get('pembayaran/{id}/cetak', [PembayaranController::class, 'cetakKwitansi'])->name('pembayaran.cetakKwitansi');
+    Route::get('pembayaran/cek/nim', [PembayaranController::class, 'cekNim'])->name('pembayaran.cekNim');
+    Route::post('pembayaran/cek/nim', [PembayaranController::class, 'postCekNim'])->name('pembayaran.post.cekNim');
+
     Route::resource('jenis-pembayaran', JenisPembayaranController::class)->only('index', 'store', 'edit', 'update');
 });
 

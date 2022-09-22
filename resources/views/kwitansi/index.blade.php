@@ -10,11 +10,11 @@
         * {
             margin: 0;
             padding: 0;
-            
+            box-sizing: border-box;
         }
         #judul{
             text-align:center;
-            margin: 30px 0px;
+            margin: 10px 0px;
         }
 
         header {
@@ -23,7 +23,7 @@
         #halaman{
             width: 100%; 
             height: auto; 
-            position: absolute; 
+            /* position: absolute;  */
             padding-left: 30px; 
             padding-right: 30px; 
             padding-bottom: 80px;
@@ -38,6 +38,11 @@
         table td {
             padding: 5px;
         }
+        footer {
+            padding: 30px;
+            position: relative;
+            bottom: 0;
+        }
     </style>
 
 </head>
@@ -45,7 +50,7 @@
 <body>
 
     <header>
-        <img src="data:image/png;base64, {{ $image }}" alt="Red dot" width="500px"/>
+        <img src="data:image/png;base64, {{ $kop }}" alt="Red dot" width="500px"/>
     </header>
 
     <div id=halaman>
@@ -89,6 +94,9 @@
         </div>
 
     </div>
+    <footer>
+        <img src="data:image/png;base64, {{ $footerKop }}" alt="Red dot" width="100%"/>
+    </footer>
 </body>
 
 </html>

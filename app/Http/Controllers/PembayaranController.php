@@ -3,12 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Exceptions\InvariantException;
+use App\Helper\MahasiswaHelper;
 use App\Http\Requests\PembayaranAddReq;
 use App\Models\JenisPembayaran;
 use App\Models\Pembayaran;
 use App\Services\Impl\PembayaranServiceImpl;
 use App\Services\PembayaranService;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Http;
 
@@ -25,6 +27,26 @@ class PembayaranController extends Controller
         return 'pembayaran/index';
     }
 
+    public function cekNim()
+    {
+        return view('pembayaran.cek-nim');
+    }
+    public function postCekNim(Request $request)
+    {
+        
+        $this->validate($request, [
+            'nim' => 'required'
+        ]);
+
+        $cekNim = MahasiswaHelper::cekNim($request->nim);
+
+        if ($cekNim) {
+            return redirect()->route('admin.pembayaran.create', $request->nim)->with('success', 'Mahasiswa ditemukan');
+        }
+        return redirect()->back()->with('error', 'Mahasiswa tidak ditemukan')->withInput($request->all());
+
+    }
+
     public function show($id) {     
         $pembayaran = Pembayaran::find($id);
         $url = 'https://feb-unsiq.ac.id/api';
@@ -37,10 +59,11 @@ class PembayaranController extends Controller
         }
     }
 
-    public function create()
+    public function create($nim)
     {
         $jenisPembayaran = JenisPembayaran::all();
-        return view('pembayaran.create', compact('jenisPembayaran'));
+        $mahasiswa = MahasiswaHelper::getMahasiswa($nim);
+        return view('pembayaran.create', compact('jenisPembayaran', 'mahasiswa'));
     }
 
     public function store(PembayaranAddReq $request)
@@ -62,8 +85,10 @@ class PembayaranController extends Controller
         $tanggal = Carbon::parse(now())->translatedFormat('d F Y');
 
         if ($response->status() == 200) {
-            $image = base64_encode(file_get_contents(public_path('kop-feb.png')));
-            $pdf = Pdf::loadView('kwitansi.index', compact('pembayaran', 'mahasiswa', 'image', 'tanggal'));
+            $kop = base64_encode(file_get_contents(public_path('kop-feb.png')));
+            $footerKop = base64_encode(file_get_contents(public_path('footer-kop.png')));
+
+            $pdf = Pdf::loadView('kwitansi.index', compact('pembayaran', 'mahasiswa', 'kop','footerKop', 'tanggal'));
             $pdf->setPaper('a5', 'landscape');
             return $pdf->stream();
         }else {
