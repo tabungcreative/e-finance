@@ -29,6 +29,10 @@
             padding-bottom: 80px;
         }
 
+        .terbilang {
+            float: left;
+            padding: 40px 20px;
+        }
         .ttd {
             float: right;
             align-items: center;
@@ -36,7 +40,7 @@
             text-align: center;
         }
         table td {
-            padding: 5px;
+            padding: 10px;
         }
         footer {
             padding: 30px;
@@ -58,40 +62,41 @@
 
         <table width="100%">
             <tr>
-                <td style="width: 30%;">No</td>
-                <td style="width: 5%;">:</td>
-                <td style="width: 65%;">{{ $pembayaran->no_pembayaran }}</td>
+                <td>No</td>
+                <td>:</td>
+                <td>{{ $pembayaran->no_pembayaran }}</td>
             </tr>
             <tr>
-                <td style="width: 30%;">Telah terima dari</td>
-                <td style="width: 5%;">:</td>
-                <td style="width: 65%;">{{ $mahasiswa['nama'] }} / {{ $mahasiswa['nim'] }}</td>
+                <td>Telah terima dari</td>
+                <td>:</td>
+                <td>{{ $mahasiswa['nama'] }} / {{ $mahasiswa['nim'] }}</td>
             </tr>
             <tr>
                 <td style="width: 30%; vertical-align: top;">Uang sebanyak</td>
                 <td style="width: 5%; vertical-align: top;">:</td>
-                <td style="width: 65%;"><span style="font: italic small-caps bold 16px/30px Georgia, serif; border: 1px dashed black; padding: 5px 20px;">
+                <td><span style="font: italic small-caps bold 16px/30px Georgia, serif; border: 1px dashed black; padding: 5px 100px 5px 30px;">
                     {{ Riskihajar\Terbilang\Facades\Terbilang::make($pembayaran->jenisPembayaran->jumlah_bayar) }} rupiah
                 </span></td>
             </tr>
             <tr>
-                <td style="width: 30%;">Guna membayar</td>
-                <td style="width: 5%;">:</td>
-                <td style="width: 65%;">{{ $pembayaran->jenisPembayaran->nama_pembayaran }}</td>
-            </tr>
-            <tr>
-                <td style="width: 30%;">Terbilang</td>
-                <td style="width: 5%;">:</td>
-                <td style="width: 65%;"><span style="border: 1px solid black; padding: 5px 20px;">Rp. {{ number_format($pembayaran->jenisPembayaran->jumlah_bayar) }}</span></td>
+                <td>Guna membayar</td>
+                <td>:</td>
+                <td>{{ $pembayaran->jenisPembayaran->nama_pembayaran }}</td>
             </tr>
         </table>
 
 
-        <div class="ttd">
-            <div>Wonosobo, {{ $tanggal }}</div>
-            <div>Penerima</div><br><br>
-            <div>{{ $mahasiswa['nama'] }}</div>
+        <div>
+            <div class="terbilang">
+                Terbilang &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span style="border: 1px solid black; padding: 5px 20px;">Rp. {{ number_format($pembayaran->jenisPembayaran->jumlah_bayar) }}</span>
+            </div>
+            <div class="ttd">
+                <div>Wonosobo, {{ $tanggal }}</div>
+                <div>Penerima</div><br><br>
+                <div>{{ $mahasiswa['nama'] }}</div>
+            </div>
         </div>
+        
 
     </div>
     <footer>

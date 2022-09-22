@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('pembayaran.create');
+    return redirect()->route('admin.pembayaran.cekNim');
 });
 
 Route::prefix('admin')->name('admin.')->group(function() {
