@@ -196,6 +196,8 @@ return [
         App\Providers\RouteServiceProvider::class,
         App\Providers\PembayaranProvider::class,
         App\Providers\JenisPembayaranProvider::class,
+        App\Providers\AkunProvider::class,
+
 
 
         // composer library
