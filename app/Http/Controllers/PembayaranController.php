@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Api\MahasiswaApi;
 use App\Exceptions\InvariantException;
-use App\Helper\MahasiswaHelper;
 use App\Http\Requests\PembayaranAddReq;
 use App\Models\JenisPembayaran;
 use App\Models\Pembayaran;
@@ -38,7 +38,7 @@ class PembayaranController extends Controller
             'nim' => 'required'
         ]);
 
-        $cekNim = MahasiswaHelper::cekNim($request->nim);
+        $cekNim = MahasiswaApi::cekNim($request->nim);
 
         if ($cekNim) {
             return redirect()->route('admin.pembayaran.create', $request->nim)->with('success', 'Mahasiswa ditemukan');
@@ -62,7 +62,7 @@ class PembayaranController extends Controller
     public function create($nim)
     {
         $jenisPembayaran = JenisPembayaran::all();
-        $mahasiswa = MahasiswaHelper::getMahasiswa($nim);
+        $mahasiswa = MahasiswaApi::getMahasiswa($nim);
         return view('pembayaran.create', compact('jenisPembayaran', 'mahasiswa'));
     }
 

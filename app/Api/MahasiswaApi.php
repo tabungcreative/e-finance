@@ -1,11 +1,10 @@
 <?php
 
-namespace App\Helper;
+namespace App\Api;
 
-use App\Exceptions\InvariantException;
 use Illuminate\Support\Facades\Http;
 
-class MahasiswaHelper {
+class MahasiswaApi {
     public static function cekNim($nim) {
         $url = 'https://feb-unsiq.ac.id/api';
         $response = Http::get($url .'/mahasiswa/' . $nim);
