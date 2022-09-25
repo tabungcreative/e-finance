@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AkunController;
 use App\Http\Controllers\JenisPembayaranController;
 use App\Http\Controllers\PembayaranController;
 use Illuminate\Support\Facades\Route;
@@ -27,5 +28,7 @@ Route::prefix('admin')->name('admin.')->group(function() {
     Route::post('pembayaran/cek/nim', [PembayaranController::class, 'postCekNim'])->name('pembayaran.post.cekNim');
 
     Route::resource('jenis-pembayaran', JenisPembayaranController::class)->only('index', 'store', 'edit', 'update');
+
+    Route::resource('akun', AkunController::class)->only('index');
 });
 
