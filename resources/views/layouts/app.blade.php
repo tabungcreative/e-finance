@@ -71,15 +71,15 @@
                 <div id="collapseTwo" class="collapse show" aria-labelledby="headingTwo"
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item active" href="{{ route('admin.pembayaran.create') }}">Pembayaran Mahasiswa</a>
-                        <a class="collapse-item" href="{{ route('admin.pembayaran.create') }}">Riwayat Pembayaran</a>
+                        <a class="collapse-item active" href="{{ route('admin.pembayaran.cekNim') }}">Pembayaran Mahasiswa</a>
+                        <a class="collapse-item" href="{{ route('admin.pembayaran.cekNim') }}">Riwayat Pembayaran</a>
                     </div>
                 </div>
             </li>
 
             <!-- Nav Item - Tables -->
             <li class="nav-item">
-                <a class="nav-link" href="tables.html">
+                <a class="nav-link" href="{{ route('admin.jenis-pembayaran.index') }}">
                     <i class="fas fa-fw fa-table"></i>
                     <span>Jenis Pembayaran</span></a>
             </li>

@@ -1,16 +1,37 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="row d-flex justify-content-center">
+<div class="row d-flex justify-content-center">
     <div class="col-md-6">
         <div class="card shadow border-0">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Data Siswa</h6>
+            </div>
+            <div class="card-body">
+                <table class="table table-striped table-hover">
+                    <tr>
+                        <th scope="col">NIM</th>
+                        <td scope="col">{{ $mahasiswa['nim'] }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="col">Nama</th>
+                        <td scope="col">{{ $mahasiswa['nama'] }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="col">Prodi</th>
+                        <td scope="col">{{ $mahasiswa['prodi'] }}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="card shadow border-0 my-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Pembayaran</h6>
+            </div>
             <div class="card-body">
                 <form method="POST" action="{{ route('admin.pembayaran.store') }}">
                     @csrf
-                    <div class="mb-3">
-                        <label class="form-label">Masukan Nomer Induk Mahasiswa</label>
-                        <input type="text" name="nim" class="form-control">
-                    </div>
+                    <input type="hidden" name="nim" value="{{ $mahasiswa['nim'] }}">
                     <div class="mb-3">
                         <label class="form-label">Jenis Pembayaran</label>
                         <select name="jenis_pembayaran_id" class="form-control">
